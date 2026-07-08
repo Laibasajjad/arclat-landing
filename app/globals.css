@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palette sampled from the Arclat brand mark: charcoal ground + silver mark.
+   Monochrome, corporate — accent is a warm silver, used sparingly. */
+:root {
+  --bg: #161617;
+  --bg-2: #1c1c1e;
+  --muted: #8b8b90;
+  --text: #f3f3f4;
+  --card: #1d1d1f;
+  --border: rgba(255, 255, 255, 0.09);
+  --accent: #c7c7cc;
+  --accent-strong: #ffffff;
+  --ink: #161617;
+  --radius-lg: 12px;
+}
+
+[data-theme="light"] {
+  --bg: #f4f4f5;
+  --bg-2: #ececed;
+  --muted: #6b6b70;
+  --text: #1a1a1c;
+  --card: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --accent: #3a3a3e;
+  --accent-strong: #161617;
+  --ink: #f4f4f5;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+
+  body {
+    min-height: 100vh;
+    color: var(--text);
+    background-color: var(--bg);
+    font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  ::selection {
+    background: rgba(199, 199, 204, 0.22);
+    color: var(--text);
+  }
+
+  a, button {
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  }
+}
+
+@layer utilities {
+  .border-hair { border-color: var(--border) !important; }
+
+  .bg-soft { background-color: var(--bg-2); }
+
+  .bg-code { background-color: rgba(0, 0, 0, 0.28); }
+  [data-theme="light"] .bg-code { background-color: rgba(0, 0, 0, 0.045); }
+
+  /* Primary button: near-white on dark, dark on light — corporate, not neon. */
+  .btn-primary {
+    background-color: var(--accent-strong);
+    color: var(--ink);
+  }
+  .btn-primary:hover { opacity: 0.9; }
+
+  /* Subtle grid + vignette instead of a glow — reads as engineering, not AI slop. */
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(70% 60% at 50% 0%, #000 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 0%, #000 0%, transparent 75%);
+  }
+}
