@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="border-t border-hair">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-12">
         <div className="flex items-center gap-2.5">
-          <img src="/logo.png" alt="Arclat" className="h-6 w-6 rounded-md border border-hair" />
+          <span aria-hidden className="brand-mark h-5 w-5" />
           <span className="text-sm font-semibold text-[var(--text)]">Arclat</span>
           <span className="text-xs text-[var(--muted)]">© {new Date().getFullYear()}</span>
         </div>

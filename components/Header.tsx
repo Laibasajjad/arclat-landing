@@ -34,7 +34,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-hair bg-[var(--bg)]/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 py-3.5 sm:px-10 lg:px-12">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src="/logo.png" alt="Arclat" className="h-8 w-8 rounded-lg border border-hair" />
+          <span aria-hidden className="brand-mark h-7 w-7" />
+          <span className="sr-only">Arclat</span>
           <span className="text-base font-semibold tracking-tight text-[var(--text)]">Arclat</span>
         </Link>
 

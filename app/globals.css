@@ -78,6 +78,14 @@
   }
   .btn-primary:hover { opacity: 0.9; }
 
+  /* Brand mark rendered as a mask so it recolors with the theme
+     (silver on dark, ink on light) instead of a fixed-tone image. */
+  .brand-mark {
+    background-color: var(--text);
+    -webkit-mask: url('/logo.png') center / contain no-repeat;
+    mask: url('/logo.png') center / contain no-repeat;
+  }
+
   /* Subtle grid + vignette instead of a glow — reads as engineering, not AI slop. */
   .hero-grid {
     background-image:
