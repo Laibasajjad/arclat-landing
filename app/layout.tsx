@@ -8,11 +8,11 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakart
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arclat.com'),
-  title: 'Arclat — Find and fix latency in your AI agent codebase',
+  title: 'Arclat: Find and fix latency in your AI agent codebase',
   description:
-    'Arclat audits your agent codebase for latency bottlenecks and applies fixes — right inside Claude Code. No log files, no context switching.',
+    'Arclat audits your agent codebase for latency bottlenecks and applies fixes, right inside Claude Code. No log files, no context switching.',
   openGraph: {
-    title: 'Arclat — Find and fix latency in your AI agent codebase',
+    title: 'Arclat: Find and fix latency in your AI agent codebase',
     description:
       'Audit your agent codebase for latency bottlenecks and apply fixes from inside Claude Code.',
     url: 'https://arclat.com',

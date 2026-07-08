@@ -1,4 +1,4 @@
-# Arclat — Landing Page
+# Arclat: Landing Page
 
 Marketing site for [arclat.com](https://arclat.com). Standalone Next.js 14 app,
 kept separate from the product app (which lives at `mcp.arclat.com`).

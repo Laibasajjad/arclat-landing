@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Palette sampled from the Arclat brand mark: charcoal ground + silver mark.
-   Monochrome, corporate — accent is a warm silver, used sparingly. */
+   Monochrome, corporate, accent is a warm silver, used sparingly. */
 :root {
   --bg: #161617;
   --bg-2: #1c1c1e;
@@ -71,7 +71,7 @@
   .bg-code { background-color: rgba(0, 0, 0, 0.28); }
   [data-theme="light"] .bg-code { background-color: rgba(0, 0, 0, 0.045); }
 
-  /* Primary button: near-white on dark, dark on light — corporate, not neon. */
+  /* Primary button: near-white on dark, dark on light, corporate, not neon. */
   .btn-primary {
     background-color: var(--accent-strong);
     color: var(--ink);
@@ -86,7 +86,7 @@
     mask: url('/logo.png') center / contain no-repeat;
   }
 
-  /* Subtle grid + vignette instead of a glow — reads as engineering, not AI slop. */
+  /* Subtle grid + vignette instead of a glow, reads as engineering, not AI slop. */
   .hero-grid {
     background-image:
       linear-gradient(to right, var(--border) 1px, transparent 1px),

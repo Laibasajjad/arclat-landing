@@ -22,7 +22,7 @@ const features = [
   {
     icon: Code2,
     title: 'Reads your actual code',
-    body: 'AST-based analysis on your real .py source — not logs, not traces, not guesses. The true source of bottlenecks.',
+    body: 'AST-based analysis on your real .py source, not logs, not traces, not guesses. The true source of bottlenecks.',
   },
   {
     icon: Gauge,
@@ -32,7 +32,7 @@ const features = [
   {
     icon: Zap,
     title: 'One-command fixes',
-    body: 'Ask Claude Code to apply a fix and Arclat patches the file in place — with a diff you approve first.',
+    body: 'Ask Claude Code to apply a fix and Arclat patches the file in place, with a diff you approve first.',
   },
   {
     icon: GitBranch,
@@ -42,7 +42,7 @@ const features = [
   {
     icon: ShieldCheck,
     title: 'Your code stays yours',
-    body: 'Analysis runs locally through the MCP server. Only usage metadata syncs — never your source.',
+    body: 'Analysis runs locally through the MCP server. Only usage metadata syncs, never your source.',
   },
 ]
 
@@ -60,7 +60,7 @@ const steps = [
   {
     n: '03',
     title: 'Apply the fixes',
-    body: 'Review the ranked findings, then let Arclat patch the ones you approve — right in your editor.',
+    body: 'Review the ranked findings, then let Arclat patch the ones you approve, right in your editor.',
   },
 ]
 
@@ -87,12 +87,12 @@ export default function Home() {
             <h1 className="mt-7 text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-6xl">
               Your AI agent is slow.
               <br />
-              Arclat tells you <span className="text-[var(--accent)]">exactly why</span> — and fixes it.
+              Arclat tells you <span className="text-[var(--accent)]">exactly why</span>, and fixes it.
             </h1>
 
             <p className="mt-5 text-base leading-7 text-[var(--muted)]">
               Arclat audits your agent codebase for latency bottlenecks, ranks them by the time they
-              cost, and applies fixes — all from a single Claude Code conversation. No log files, no
+              cost, and applies fixes, all from a single Claude Code conversation. No log files, no
               context switching.
             </p>
 
