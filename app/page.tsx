@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Terminal, Code2, Zap, GitBranch, ShieldCheck, Gauge, ArrowRight, Check } from 'lucide-react'
 import { nav } from '../lib/site'
 
@@ -66,19 +66,67 @@ const steps = [
   },
 ]
 
-const pricing = [
-  { tier: 'Free', price: '$0', cadence: '', desc: '20 audits / month', points: ['AST audit engine', 'Ranked findings', 'No credit card'], cta: 'Start free', highlight: false },
-  { tier: 'Pro', price: '$19', cadence: '/mo', desc: 'For individual builders', points: ['Unlimited audits', 'apply_fix tool', 'GitHub Action'], cta: 'Go Pro', highlight: true },
-  { tier: 'Team', price: '$49', cadence: '/mo', desc: 'For small teams', points: ['5 seats', 'Everything in Pro', 'Shared reports'], cta: 'Start Team', highlight: false },
-  { tier: 'Enterprise', price: '$200+', cadence: '/mo', desc: 'For orgs at scale', points: ['Custom seats', 'Slack support', 'SSO & invoicing'], cta: 'Contact us', highlight: false },
-]
-
 const rotatingPhrases = ['slow.', 'expensive.', 'hard to debug.']
+
+const faqs = [
+  {
+    question: 'What is Arclat?',
+    answer:
+      'Arclat is an MCP server that helps you identify, rank, and fix latency bottlenecks in AI agent code directly inside Claude Code.',
+  },
+  {
+    question: 'Does Arclat send my source code to the cloud?',
+    answer:
+      'No. Analysis runs locally through the MCP server. Only usage metadata is synced. Your source code remains on your machine.',
+  },
+  {
+    question: 'Which programming languages are supported?',
+    answer:
+      'Arclat currently focuses on Python agent codebases, with support for additional languages planned.',
+  },
+  {
+    question: 'Do I need Claude Code?',
+    answer:
+      'Yes. Arclat integrates with Claude Code using the Model Context Protocol (MCP).',
+  },
+  {
+    question: 'Can Arclat automatically fix issues?',
+    answer:
+      'Yes. Arclat can generate fixes and apply them inside Claude Code after you review and approve the changes.',
+  },
+  {
+    question: 'Is there a free plan?',
+    answer:
+      'Yes. You can start with the free plan, which includes a limited number of audits each month.',
+  },
+]
 
 export default function Home() {
   const [text, setText] = useState('')
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!email.trim()) {
+      return
+    }
+
+    setLoading(true)
+    setSuccess(false)
+
+    await new Promise((resolve) => setTimeout(resolve, 1200))
+
+    setLoading(false)
+    setSuccess(true)
+    setName('')
+    setEmail('')
+  }
 
 useEffect(() => {
   const current = rotatingPhrases[phraseIndex]
@@ -244,60 +292,112 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="mx-auto w-full max-w-6xl px-6 py-16 sm:px-10 lg:px-12">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
-            Simple pricing
-          </h2>
-          <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-            Start free. Upgrade when you want unlimited audits and in-editor fixes.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {pricing.map((p) => (
-            <div
-              key={p.tier}
-              className={`flex flex-col rounded-xl border p-6 ${
-                p.highlight ? 'border-[var(--accent)]' : 'border-hair'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-xs uppercase tracking-widest text-[var(--muted)]">{p.tier}</p>
-                {p.highlight && (
-                  <span className="btn-primary rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest">
-                    Popular
-                  </span>
-                )}
-              </div>
-              <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-3xl font-semibold tracking-tight text-[var(--text)]">{p.price}</span>
-                <span className="text-sm text-[var(--muted)]">{p.cadence}</span>
-              </div>
-              <p className="mt-1 text-xs text-[var(--muted)]">{p.desc}</p>
-
-              <ul className="mt-5 flex flex-1 flex-col gap-2.5">
-                {p.points.map((pt) => (
-                  <li key={pt} className="flex items-start gap-2 text-sm text-[var(--text)]">
-                    <Check size={15} className="mt-0.5 shrink-0 text-[var(--accent)]" />
-                    {pt}
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={nav.getStarted}
-                className={`mt-6 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold ${
-                  p.highlight
-                    ? 'btn-primary'
-                    : 'border border-hair text-[var(--text)] hover:bg-soft'
-                }`}
-              >
-                {p.cta}
-              </a>
+      {/* Waitlist */}
+      <section id="waitlist" className="mx-auto w-full max-w-6xl px-6 py-16 sm:px-10 lg:px-12">
+        <div className="grid gap-10 rounded-3xl border border-hair bg-[var(--card)] p-8 shadow-xl shadow-black/5 sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
+          <div className="flex flex-col justify-center">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--accent)]/25 bg-[var(--bg)] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+              Launching Soon
             </div>
-          ))}
+
+            <h2 className="mt-6 text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl">
+              Join the Waitlist
+            </h2>
+
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)]">
+              Be among the first developers to use Arclat. Get early access, exclusive updates, and help shape the future of AI agent latency optimization.
+            </p>
+
+            <ul className="mt-8 space-y-3">
+              {[
+                'Early access before public launch',
+                'Priority onboarding and updates',
+                'Influence upcoming features',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-[var(--text)]">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--bg)] text-[var(--accent)]">
+                    <Check size={14} />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-hair bg-[var(--bg)]/70 p-6 shadow-lg shadow-black/5 backdrop-blur-sm sm:p-7">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--text)]">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Ava Chen"
+                  className="w-full rounded-lg border border-hair bg-[var(--card)] px-4 py-3 text-sm text-[var(--text)] outline-none transition-all duration-300 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--text)]">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@company.com"
+                  className="w-full rounded-lg border border-hair bg-[var(--card)] px-4 py-3 text-sm text-[var(--text)] outline-none transition-all duration-300 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary inline-flex w-full items-center justify-center rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-80"
+              >
+                {loading ? 'Joining...' : 'Join Waitlist'}
+              </button>
+
+              {success ? (
+                <p className="text-sm font-medium text-[var(--accent-strong)]">
+                  You&apos;re on the waitlist! 🎉
+                </p>
+              ) : (
+                <p className="text-sm text-[var(--muted)]">
+                  We&apos;ll only email you about Arclat updates. No spam.
+                </p>
+              )}
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="mx-auto w-full max-w-6xl scroll-mt-24 px-6 pb-8 sm:px-10 lg:px-12">
+        <div className="rounded-3xl border border-hair bg-[var(--card)] p-8 shadow-xl shadow-black/5 sm:p-10 lg:p-12">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
+              Frequently asked questions
+            </h2>
+            <p className="mt-3 text-base leading-7 text-[var(--muted)]">
+              Everything you need to know before joining the early access list.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {faqs.map((item) => (
+              <div key={item.question} className="rounded-2xl border border-hair bg-[var(--bg)]/70 p-5">
+                <h3 className="text-base font-semibold text-[var(--text)]">{item.question}</h3>
+                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{item.answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

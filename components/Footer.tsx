@@ -12,7 +12,7 @@ export default function Footer() {
         </div>
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[var(--muted)]">
           <a href="#features" className="hover:text-[var(--text)]">Features</a>
-          <a href="#pricing" className="hover:text-[var(--text)]">Pricing</a>
+          <a href="#faq" className="hover:text-[var(--text)]">FAQ</a>
           <a href={nav.app} className="hover:text-[var(--text)]">MCP App</a>
           <a href={nav.getStarted} className="hover:text-[var(--text)]">Get started</a>
         </nav>
