@@ -61,14 +61,21 @@
     border-color: var(--border);
   }
 
-  ::selection {
-    background: rgba(199, 199, 204, 0.22);
-    color: var(--text);
-  }
+::selection {
+  background: rgba(109, 31, 59, 0.22);
+  color: var(--text);
+}
 
-  a, button {
-    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
-  }
+a,
+button {
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
 }
 
 @layer utilities {
@@ -80,11 +87,29 @@
   [data-theme="light"] .bg-code { background-color: rgba(0, 0, 0, 0.045); }
 
   /* Primary button: near-white on dark, dark on light, corporate, not neon. */
-  .btn-primary {
-    background-color: var(--accent-strong);
-    color: var(--ink);
-  }
-  .btn-primary:hover { opacity: 0.9; }
+.btn-primary {
+  background: var(--accent-strong);
+  color: var(--ink);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 8px 24px rgba(109, 31, 59, 0.18);
+}
+
+.btn-primary:hover {
+  background: #53172D;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(109, 31, 59, 0.28);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
 
   /* Brand mark rendered as a mask so it recolors with the theme
      (silver on dark, ink on light) instead of a fixed-tone image. */
