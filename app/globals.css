@@ -5,15 +5,23 @@
 /* Palette sampled from the Arclat brand mark: charcoal ground + silver mark.
    Monochrome, corporate, accent is a warm silver, used sparingly. */
 :root {
-  --bg: #161617;
-  --bg-2: #1c1c1e;
-  --muted: #8b8b90;
-  --text: #f3f3f4;
-  --card: #1d1d1f;
-  --border: rgba(255, 255, 255, 0.09);
-  --accent: #c7c7cc;
-  --accent-strong: #ffffff;
-  --ink: #161617;
+  --bg: #F9F4EF;
+  --bg-2: #F3ECE5;
+
+  --muted: #7A6E68;
+
+  --text: #2C2C2C;
+
+  --card: #FFFFFF;
+
+  --border: #E8D8C7;
+
+  --accent: #C8A45C;
+
+  --accent-strong: #6D1F3B;
+
+  --ink: #FFFFFF;
+
   --radius-lg: 12px;
 }
 

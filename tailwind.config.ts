@@ -8,8 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#7dd6f5',
-      },
+      burgundy: "#6D1F3B",
+      burgundyDark: "#53172D",
+      cream: "#F9F4EF",
+      gold: "#C8A45C",
+      charcoal: "#2C2C2C",
+    },
       fontFamily: {
         heading: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
         body: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
