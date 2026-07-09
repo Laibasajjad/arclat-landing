@@ -13,4 +13,9 @@ export const nav = {
   signIn: COMING_SOON,
   getStarted: COMING_SOON,
   dashboard: COMING_SOON,
+   socials: {
+    github: "https://github.com/orgs/arclat-ai",
+    linkedin: "https://www.linkedin.com/company/arclat/",
+    instagram: "https://www.instagram.com/arclat.ai/",
+  },
 }
