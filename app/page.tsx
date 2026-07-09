@@ -1,3 +1,5 @@
+'use client';
+import { useEffect, useState } from 'react'
 import { Terminal, Code2, Zap, GitBranch, ShieldCheck, Gauge, ArrowRight, Check } from 'lucide-react'
 import { nav } from '../lib/site'
 
@@ -71,26 +73,66 @@ const pricing = [
   { tier: 'Enterprise', price: '$200+', cadence: '/mo', desc: 'For orgs at scale', points: ['Custom seats', 'Slack support', 'SSO & invoicing'], cta: 'Contact us', highlight: false },
 ]
 
+const rotatingPhrases = ['slow.', 'expensive.', 'hard to debug.']
+
 export default function Home() {
+  const [text, setText] = useState('')
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+useEffect(() => {
+  const current = rotatingPhrases[phraseIndex]
+
+  const timer = setTimeout(() => {
+    if (!isDeleting) {
+      setText(current.substring(0, text.length + 1))
+
+      if (text === current) {
+        setTimeout(() => {
+          setIsDeleting(true)
+        }, 1200)
+      }
+    } else {
+      setText(current.substring(0, text.length - 1))
+
+      if (text === "") {
+        setIsDeleting(false)
+        setPhraseIndex((phraseIndex + 1) % rotatingPhrases.length)
+      }
+    }
+  }, isDeleting ? 50 : 90)
+
+  return () => clearTimeout(timer)
+}, [text, isDeleting, phraseIndex])
+
   return (
     <main>
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(109,31,59,0.08),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(200,164,92,0.08),transparent_40%)]">
         <div className="pointer-events-none absolute inset-0 hero-grid" />
         <div className="mx-auto grid w-full max-w-6xl items-start gap-12 px-6 py-16 sm:px-10 lg:grid-cols-[1fr_0.9fr] lg:gap-16 lg:px-12 lg:py-24">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-hair px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-[var(--muted)]">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)] shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
               MCP · Claude Code
             </div>
 
-            <h1 className="mt-7 text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-6xl">
-              Your AI agent is slow.
-              <br />
-              Arclat tells you <span className="text-[var(--accent)]">exactly why</span>, and fixes it.
-            </h1>
+        <h1 className="mt-7 text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-6xl">
+          Your AI agent is{" "}
+          <span className="text-[var(--accent-strong)] inline-flex items-center min-w-[11ch]">
+         {text}
+        <span className="ml-1 h-8 w-[2px] bg-[var(--accent-strong)] animate-pulse"></span>
+        </span>
 
-            <p className="mt-5 text-base leading-7 text-[var(--muted)]">
+        <br />
+
+          Arclat tells you{" "}
+          <span className="text-[var(--accent-strong)]">
+          exactly why
+          </span>, and fixes it.
+        </h1>
+
+            <p className="mt-6 text-lg leading-8 text-[var(--muted)]">
               Arclat audits your agent codebase for latency bottlenecks, ranks them by the time they
               cost, and applies fixes, all from a single Claude Code conversation. No log files, no
               context switching.
@@ -117,7 +159,10 @@ export default function Home() {
                 { value: 'Ranked', label: 'Bottlenecks sorted by time lost, not guesswork.' },
                 { value: 'Auto-fix', label: 'Apply patches directly from Claude Code.' },
               ].map((item) => (
-                <div key={item.value} className="rounded-lg border border-hair bg-soft p-4">
+                <div
+                  key={item.value}
+                  className="rounded-xl border border-hair bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
                   <div className="text-xl font-semibold text-[var(--text)]">{item.value}</div>
                   <p className="mt-1 text-xs text-[var(--muted)]">{item.label}</p>
                 </div>
